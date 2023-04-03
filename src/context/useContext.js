@@ -17,6 +17,8 @@ export const useContextData = () => {
 		},
 	});
 
+	const [accentColor, setAccentColor] = useState("var(--blue)");
+
 	// Media Breakpoints
 	const mediaQuerySm = window.matchMedia("(max-width: 672px)");
 	const mediaQueryMd = window.matchMedia("(max-width: 880px)");
@@ -37,5 +39,7 @@ export const useContextData = () => {
 		isAuthenticated,
 		setIsAuthenticated,
 		axiosInstance,
+		accentColor,
+		setAccentColor,
 	};
 };

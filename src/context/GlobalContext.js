@@ -7,6 +7,8 @@ const GlobalContext = createContext({
 	isAuthenticated: "",
 	setIsAuthenticated: () => {},
 	axiosInstance: undefined,
+	accentColor: "",
+	setAccentColor: () => {},
 });
 
 export default GlobalContext;
