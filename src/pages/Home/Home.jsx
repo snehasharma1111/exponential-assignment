@@ -4,10 +4,11 @@ import { bg, bg2 } from "../../images";
 import Input from "../../components/Input/Input";
 import { Box, Clipboard, Download } from "react-feather";
 import { matchTwitterStatusUrl } from "../../utils";
-import axios from "axios";
+import axios, { all } from "axios";
 import Row, { Col } from "../../layout/Responsive";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
+import { apiKey } from "../../constants";
 
 const Home = () => {
 	const [link, setLink] = useState("");
@@ -17,8 +18,8 @@ const Home = () => {
 		e.preventDefault();
 		if (matchTwitterStatusUrl(link)) {
 			axios
-				.get(
-					`https://api.exponentialhost.com`,
+				.post(
+					"https://tweet-image.exponential.host/image",
 					{
 						twitterUrl: link,
 						imageType: "square",
@@ -32,40 +33,19 @@ const Home = () => {
 						],
 					},
 					{
-						"Content-Type": "application/json",
+						headers: {
+							"Content-Type": "application/json",
+							exponential_api_secret: apiKey,
+						},
 					}
 				)
 				.then((res) => {
-					console.log(res);
-					setImages({
-						crisp: "https://i.exponentialhost.com/tweetImages/crisp_1599840937298968576_square.png",
-						blurredlogo:
-							"https://i.exponentialhost.com/tweetImages/blurredlogo_1599840937298968576_square.png",
-						highlight:
-							"https://i.exponentialhost.com/tweetImages/highlight_1599840937298968576_square.png",
-						orangecandy:
-							"https://i.exponentialhost.com/tweetImages/orangecandy_1599840937298968576_square.png",
-						speechbubble:
-							"https://i.exponentialhost.com/tweetImages/speechbubble_1599840937298968576_square.png",
-						twitterblue:
-							"https://i.exponentialhost.com/tweetImages/twitterblue_1599840937298968576_square.png",
-					});
+					setImages(res);
 				})
 				.catch((err) => {
 					console.error(err);
-					setImages({
-						crisp: "https://i.exponentialhost.com/tweetImages/crisp_1599840937298968576_square.png",
-						blurredlogo:
-							"https://i.exponentialhost.com/tweetImages/blurredlogo_1599840937298968576_square.png",
-						highlight:
-							"https://i.exponentialhost.com/tweetImages/highlight_1599840937298968576_square.png",
-						orangecandy:
-							"https://i.exponentialhost.com/tweetImages/orangecandy_1599840937298968576_square.png",
-						speechbubble:
-							"https://i.exponentialhost.com/tweetImages/speechbubble_1599840937298968576_square.png",
-						twitterblue:
-							"https://i.exponentialhost.com/tweetImages/twitterblue_1599840937298968576_square.png",
-					});
+					alert("An Error Occured. Try refreshing the page");
+					setImages({});
 				});
 		} else alert("Invalid URL");
 	};
