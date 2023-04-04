@@ -1,4 +1,49 @@
 .home {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-flow: column;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 5%;
+
+    &-content {
+        font: 36px;
+        font-family: 'Noto Serif', serif;
+        font-size: 48px;
+        line-height: 150%;
+        color: var(--indigo-700);
+        margin: 20px 0;
+    }
+
+    &-form {
+        width: 40%;
+
+        .input-group {
+            width: 100%;
+            transform: scale(1.15);
+            transform-origin: right;
+            margin: 36px 0;
+        }
+
+        &-buttons {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-flow: row-reverse;
+            background-color: #fff;
+            margin: 0 2px 0 8px;
+        }
+
+        &-button {
+            margin: 0 16px 0 0;
+        }
+    }
 }

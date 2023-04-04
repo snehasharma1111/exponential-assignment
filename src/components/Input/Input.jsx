@@ -1,75 +1,33 @@
-import React, { useContext } from "react";
-import GlobalContext from "../../context/GlobalContext";
-import MaterialIcons from "../MaterialIcons";
 import "./input.scss";
+import PropTypes from "prop-types";
 
 const Input = ({
-	name,
+	label,
+	className,
+	children,
+	boxStyle,
 	placeholder,
-	type,
-	autoFocus,
-	disabled,
-	icon,
+	value,
+	onChange,
 	...rest
 }) => {
-	const { accentColor } = useContext(GlobalContext);
 	return (
-		<div className="form-group">
-			<label
-				style={{
-					color: document.body.classList.contains("dark")
-						? `var(--${accentColor}-100)`
-						: `var(--${accentColor})`,
-				}}
-			>
-				<MaterialIcons>{icon}</MaterialIcons>
-			</label>
+		<div className="input-group" style={boxStyle}>
+			{label ? <label className="input-label">{label}</label> : null}
 			<input
-				name={name}
-				placeholder={placeholder}
-				type={type}
-				autoFocus={autoFocus}
-				disabled={disabled}
 				{...rest}
+				className="input"
+				placeholder={placeholder}
+				value={value}
+				onChange={onChange}
 			></input>
-		</div>
-	);
-};
-
-const TextArea = ({
-	name,
-	placeholder,
-	type,
-	autoFocus,
-	disabled,
-	icon,
-	...rest
-}) => {
-	const { accentColor } = useContext(GlobalContext);
-	return (
-		<div className="form-group">
-			<label
-				style={{
-					top: 0,
-					transform: "translate(50%, 25%)",
-					color: document.body.classList.contains("dark")
-						? `var(--${accentColor}-100)`
-						: `var(--${accentColor})`,
-				}}
-			>
-				<MaterialIcons>{icon}</MaterialIcons>
-			</label>
-			<textarea
-				name={name}
-				placeholder={placeholder}
-				type={type}
-				autoFocus={autoFocus}
-				disabled={disabled}
-				{...rest}
-			></textarea>
+			{children}
 		</div>
 	);
 };
 
 export default Input;
-export { TextArea };
+
+Input.propTypes = {
+	label: PropTypes.string,
+};
