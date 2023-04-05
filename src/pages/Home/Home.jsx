@@ -4,7 +4,7 @@ import { bg, bg2 } from "../../images";
 import Input from "../../components/Input/Input";
 import { Box, Clipboard, Download } from "react-feather";
 import { matchTwitterStatusUrl } from "../../utils";
-import axios, { all } from "axios";
+import axios from "axios";
 import Row, { Col } from "../../layout/Responsive";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
@@ -40,7 +40,7 @@ const Home = () => {
 					}
 				)
 				.then((res) => {
-					setImages(res);
+					setImages(res.data);
 				})
 				.catch((err) => {
 					console.error(err);
